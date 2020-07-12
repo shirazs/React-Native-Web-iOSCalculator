@@ -9,7 +9,7 @@ const numbers = [[7, 8, 9], [4, 5, 6], [1, 2, 3]];
 interface Props {
   activeOperator: string | null;
   memoryState: string;
-  handlePress: (action: Action) => void;
+  handlePress: (action: Action, e?: any) => void;
 }
 
 export const KeyPad: React.FC<Props> = ({
@@ -52,27 +52,27 @@ export const KeyPad: React.FC<Props> = ({
           return (
             <View style={Styles.row} key={`row_${i}`}>
               <TouchableHighlight
-                onPress={() => handlePress({ type: "DIGIT", payload: row[0] })}
+                onPress={(event) => handlePress({ type: "DIGIT", payload: row[0] }, event)}
                 style={[Styles.button, Styles.buttonKey]}
                 underlayColor="#B4B5B7"
               >
-                <Text data-testid={`key-${row[0]}`} style={Styles.buttonText}>
+                <Text testID={`key-${row[0]}`} style={Styles.buttonText}>
                   {row[0]}
                 </Text>
               </TouchableHighlight>
 
               <TouchableHighlight
-                onPress={() => handlePress({ type: "DIGIT", payload: row[1] })}
+                onPress={(event) => handlePress({ type: "DIGIT", payload: row[1] }, event)}
                 style={[Styles.button, Styles.buttonKey]}
                 underlayColor="#B4B5B7"
               >
-                <Text data-testid={`key-${row[1]}`} style={Styles.buttonText}>
+                <Text testID={`key-${row[1]}`} style={Styles.buttonText}>
                   {row[1]}
                 </Text>
               </TouchableHighlight>
 
               <TouchableHighlight
-                onPress={() => handlePress({ type: "DIGIT", payload: row[2] })}
+                onPress={(event) => handlePress({ type: "DIGIT", payload: row[2] }, event)}
                 style={[Styles.button, Styles.buttonKey]}
                 underlayColor="#B4B5B7"
               >
@@ -84,7 +84,7 @@ export const KeyPad: React.FC<Props> = ({
 
         <View style={Styles.row}>
           <TouchableHighlight
-            onPress={() => handlePress({ type: "DIGIT", payload: 0 })}
+            onPress={(event) => handlePress({ type: "DIGIT", payload: 0 }, event)}
             style={[Styles.button, Styles.double]}
             underlayColor="#B4B5B7"
           >

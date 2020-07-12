@@ -6,7 +6,7 @@ import { Action } from "../types";
 
 interface Props {
   activeOperator: string | null;
-  handlePress: (object: Action) => void;
+  handlePress: (object: Action, e?: any) => void;
 }
 
 export const Operators: React.FC<Props> = ({ activeOperator, handlePress }) => {
@@ -30,7 +30,7 @@ export const Operators: React.FC<Props> = ({ activeOperator, handlePress }) => {
       ))}
 
       <TouchableHighlight
-        onPress={() => handlePress({ type: "EVALUATE" })}
+        onPress={(e) => handlePress({ type: "EVALUATE" }, e)}
         style={[Styles.button, Styles.buttonOperand]}
         underlayColor="#B4B5B7"
       >
