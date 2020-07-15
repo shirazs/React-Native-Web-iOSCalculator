@@ -9,37 +9,37 @@ export type State = {
 };
 
 type Number = {
-  readonly type: "DIGIT";
-  readonly payload: number;
+  type: "DIGIT";
+  payload: number;
 };
 
 type Operator = {
-  readonly type: "OPERATOR";
-  readonly payload: string;
+  type: "OPERATOR";
+  payload: string;
 };
 
 type Sign = {
-  readonly type: "TOGGLE_SIGN";
+  type: "TOGGLE_SIGN";
   payload?: string;
 };
 
 type Percent = {
-  readonly type: "PERCENT";
+  type: "PERCENT";
   payload?: string;
 };
 
 type Decimal = {
-  readonly type: "DECIMAL";
+  type: "DECIMAL";
   payload?: string;
 };
 
 type MemoryClear = {
-  readonly type: "MEMORY_CLEAR";
+  type: "MEMORY_CLEAR";
   payload?: string;
 };
 
 type Evaluate = {
-  readonly type: "EVALUATE";
+  type: "EVALUATE";
   payload?: string;
 };
 
