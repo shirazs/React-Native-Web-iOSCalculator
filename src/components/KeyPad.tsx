@@ -26,7 +26,7 @@ export const KeyPad: React.FC<Props> = ({
             style={[Styles.button, Styles.buttonKey, Styles.buttonControl]}
             underlayColor="#B4B5B7"
           >
-            <Text style={[Styles.buttonText, Styles.buttonControlText]}>
+            <Text style={Styles.buttonText}>
               {memoryState}
             </Text>
           </TouchableHighlight>
@@ -36,7 +36,7 @@ export const KeyPad: React.FC<Props> = ({
             style={[Styles.button, Styles.buttonKey, Styles.buttonControl]}
             underlayColor="#B4B5B7"
           >
-            <Text style={[Styles.buttonText, Styles.buttonControlText]}>±</Text>
+            <Text style={Styles.buttonText}>±</Text>
           </TouchableHighlight>
 
           <TouchableHighlight
@@ -44,11 +44,11 @@ export const KeyPad: React.FC<Props> = ({
             style={[Styles.button, Styles.buttonKey, Styles.buttonControl]}
             underlayColor="#B4B5B7"
           >
-            <Text style={[Styles.buttonText, Styles.buttonControlText]}>%</Text>
+            <Text style={Styles.buttonText}>%</Text>
           </TouchableHighlight>
         </View>
 
-        {numbers.map((row, i) => {
+        { numbers.map((row, i) => {
           return (
             <View style={Styles.row} key={`row_${i}`}>
               <TouchableHighlight

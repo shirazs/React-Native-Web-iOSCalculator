@@ -1,7 +1,7 @@
 import { getOperators } from "../utils/operatorMap";
 
 export const OPERATORS = [...getOperators()];
-export const DISPLAY_FONT_SIZE = 68;
+export const DISPLAY_FONT_SIZE = 30;
 
 export const initialState = {
   displayValue: "0",

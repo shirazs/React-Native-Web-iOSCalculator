@@ -5,8 +5,8 @@ import { isMobileOnly } from "react-device-detect";
 export const Styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: isMobileOnly ? "100vw" : 325,
-    height: isMobileOnly ? "90vh" : 475,
+    width: isMobileOnly ? "100vw" : 305,
+    height: isMobileOnly ? window.innerHeight : 475,
     position: "absolute",
     top: 0,
     bottom: 0,
@@ -29,15 +29,14 @@ export const Styles = StyleSheet.create({
   resultText: {
     display: "flex",
     flex: 1,
-    fontFamily: "System",
+    fontFamily: "San Francisco",
     fontWeight: "100",
-    fontSize: DISPLAY_FONT_SIZE,
+    fontSize: DISPLAY_FONT_SIZE * PixelRatio.get(),
     overflow: 'visible',
     color: 'white',
     textAlign: "right",
-    height: 78,
     position: "absolute",
-    right: 13,
+    right: 15,
     bottom: 7,
     transformOrigin: 'right bottom',
     alignItems: "flex-end",
@@ -48,7 +47,10 @@ export const Styles = StyleSheet.create({
   containerKeypad: {
     flexDirection: "row",
     alignSelf: "stretch",
-    flex: 0.73
+    flex: 0.73,
+    fontSize: 10 * PixelRatio.get(),
+    fontFamily: 'San Francisco',
+    fontWeight: 200,
   },
 
   row: {
@@ -78,8 +80,8 @@ export const Styles = StyleSheet.create({
     backgroundColor: "#D4D4D2",
     borderColor: "grey",
     borderLeftWidth: 0,
-    borderTopWidth: 1 / PixelRatio.get(),
-    borderRightWidth: 1 / PixelRatio.get(),
+    borderTopWidth: 1,
+    borderRightWidth: 1,
     alignItems: "center",
     justifyContent: "center"
   },
@@ -90,29 +92,24 @@ export const Styles = StyleSheet.create({
   },
 
   buttonText: {
-    fontSize: 28,
     color: "black",
-    fontFamily: "System",
-    fontWeight: "100"
+    fontSize: 'inherit',
+    fontWeight: 'inherit'
   },
-
+  
   buttonOperand: {
     alignSelf: "stretch",
     flex: 0.25,
-    backgroundColor: "#FF9500"
+    backgroundColor: "#FF9500",
+    fontSize: 'inherit'
   },
 
   buttonTextOperand: {
-    fontSize: 38,
     color: "white"
   },
 
   buttonControl: {
     backgroundColor: "#C6C8CA"
-  },
-
-  buttonControlText: {
-    fontSize: 24
   },
 
   double: {
