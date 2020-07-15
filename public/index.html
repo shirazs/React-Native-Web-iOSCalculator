@@ -20,13 +20,14 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-	<title>React App</title>
+	<title>Calculator</title>
 
 	<style>
 		/* These styles make the body full-height */
 		html,
 		body {
 			height: 100%;
+      background-color: #ffffff;
 		}
 		/* These styles disable body scrolling if you are using <ScrollView> */
 		body {
@@ -36,6 +37,52 @@
 		#root {
 			display: flex;
 			height: 100%;
+		}
+		/**
+		* http://applemusic.tumblr.com/
+		* https://jsfiddle.net/xq56dmrh/
+		*/
+
+		/** Ultra Light */
+		@font-face {
+			font-family: "San Francisco";
+			font-weight: 100;
+			src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-ultralight-webfont.woff");
+		}
+
+		/** Thin */
+		@font-face {
+			font-family: "San Francisco";
+			font-weight: 200;
+			src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.woff");
+		}
+
+		/** Regular */
+		@font-face {
+			font-family: "San Francisco";
+			font-weight: 400;
+			src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+		}
+
+		/** Medium */
+		@font-face {
+			font-family: "San Francisco";
+			font-weight: 500;
+			src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.woff");
+		}
+
+		/** Semi Bold */
+		@font-face {
+			font-family: "San Francisco";
+			font-weight: 600;
+			src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-semibold-webfont.woff");
+		}
+
+		/** Bold */ 
+		@font-face {
+			font-family: "San Francisco";
+			font-weight: 700;
+			src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff");
 		}
 	</style>
 </head>
