@@ -30,7 +30,7 @@ export const Styles = StyleSheet.create({
     display: "flex",
     flex: 1,
     fontFamily: "San Francisco",
-    fontWeight: "100",
+    fontWeight: "200",
     fontSize: DISPLAY_FONT_SIZE * PixelRatio.get(),
     overflow: 'visible',
     color: 'white',
@@ -40,7 +40,8 @@ export const Styles = StyleSheet.create({
     bottom: 7,
     transformOrigin: 'right bottom',
     alignItems: "flex-end",
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    letterSpacing: -1.5
   },
 
   /* Container for keypad */
@@ -80,8 +81,8 @@ export const Styles = StyleSheet.create({
     backgroundColor: "#D4D4D2",
     borderColor: "grey",
     borderLeftWidth: 0,
-    borderTopWidth: 1,
-    borderRightWidth: 1,
+    borderTopWidth: 1.5,
+    borderRightWidth: 1.5,
     alignItems: "center",
     justifyContent: "center"
   },

@@ -6,11 +6,9 @@ import { formatter } from "../utils/evaluation";
 type Props = {
   displayValue: string;
   scale: number;
-  testID: string;
 };
 
 export const ResultPane: React.FC<Props> = ({ displayValue, scale }) => {
-  
   return (
     <View style={Styles.resultPane}>
       <Text
@@ -21,6 +19,7 @@ export const ResultPane: React.FC<Props> = ({ displayValue, scale }) => {
             transform: [{ scale }]
           }]
         }
+        testID="display"
       >
         {formatter(displayValue)}
       </Text>

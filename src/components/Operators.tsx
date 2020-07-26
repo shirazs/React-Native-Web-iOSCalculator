@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableHighlight } from "react-native";
 import { Styles } from "../styles/styles";
-import { OPERATORS } from "../constants/index";
+import { OPERATORS } from "../constants/";
 import { Action } from "../types";
 
 interface Props {

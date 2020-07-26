@@ -1,15 +1,14 @@
-import { add, subtract, divide, multiply, MathType } from "mathjs";
+import { Decimal } from 'decimal.js';
 
 export const operatorMap = {
-  "÷": (leftOperand: number, rightOperand: number): MathType => {
-    return divide(leftOperand, rightOperand);
-  },
-  "×": (leftOperand: number, rightOperand: number): MathType =>
-    multiply(leftOperand, rightOperand),
-  "−": (leftOperand: number, rightOperand: number): MathType =>
-    subtract(leftOperand, rightOperand),
-  "+": (leftOperand: number, rightOperand: number): MathType =>
-    add(leftOperand, rightOperand)
+  "÷": (leftOperand: number, rightOperand: number) => 
+    Decimal.div(leftOperand, rightOperand).toNumber(),
+  "×": (leftOperand: number, rightOperand: number) =>
+    Decimal.mul(leftOperand, rightOperand).toNumber(),
+  "−": (leftOperand: number, rightOperand: number) =>
+    Decimal.sub(leftOperand, rightOperand).toNumber(),
+  "+": (leftOperand: number, rightOperand: number) =>
+    Decimal.add(leftOperand, rightOperand).toNumber()
 };
 
 export const getOperators = () => Object.keys(operatorMap);

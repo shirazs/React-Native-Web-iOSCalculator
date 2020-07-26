@@ -55,8 +55,9 @@ export const KeyPad: React.FC<Props> = ({
                 onPress={(event) => handlePress({ type: "DIGIT", payload: row[0] }, event)}
                 style={[Styles.button, Styles.buttonKey]}
                 underlayColor="#B4B5B7"
+                testID={`key-${row[0]}`}
               >
-                <Text testID={`key-${row[0]}`} style={Styles.buttonText}>
+                <Text  style={Styles.buttonText}>
                   {row[0]}
                 </Text>
               </TouchableHighlight>
@@ -65,8 +66,9 @@ export const KeyPad: React.FC<Props> = ({
                 onPress={(event) => handlePress({ type: "DIGIT", payload: row[1] }, event)}
                 style={[Styles.button, Styles.buttonKey]}
                 underlayColor="#B4B5B7"
+                testID={`key-${row[1]}`}
               >
-                <Text testID={`key-${row[1]}`} style={Styles.buttonText}>
+                <Text style={Styles.buttonText}>
                   {row[1]}
                 </Text>
               </TouchableHighlight>
@@ -75,8 +77,11 @@ export const KeyPad: React.FC<Props> = ({
                 onPress={(event) => handlePress({ type: "DIGIT", payload: row[2] }, event)}
                 style={[Styles.button, Styles.buttonKey]}
                 underlayColor="#B4B5B7"
+                testID={`key-${row[2]}`} 
               >
-                <Text style={Styles.buttonText}>{row[2]}</Text>
+                <Text style={Styles.buttonText}>
+                  {row[2]}
+                </Text>
               </TouchableHighlight>
             </View>
           );

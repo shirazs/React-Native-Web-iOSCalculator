@@ -42,7 +42,6 @@ export const Calculator: React.FC = () => {
     <View style={Styles.container} nativeID='app'>
       <ResultPane 
         displayValue={state.displayValue} 
-        testID="display"
         scale={textScale}
       />
       <KeyPad
