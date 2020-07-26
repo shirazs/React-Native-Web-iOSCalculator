@@ -10,21 +10,20 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@types/mathjs": "6.0.5",
-    "mathjs": "7.0.2",
+    "decimal.js": "^10.2.0",
     "react": "16.13.1",
     "react-device-detect": "1.13.1",
     "react-dom": "16.13.1",
-    "react-native-testing-library": "1.14.0",
-    "react-native-web": "0.13.3",
+    "react-native-web": "0.13.4",
     "react-scripts": "3.4.1",
     "react-test-renderer": "16.13.1"
   },
   "devDependencies": {
-    "@types/react": "16.9.42",
+    "@testing-library/react": "^10.4.7",
+    "@types/react": "16.9.43",
     "@types/react-dom": "16.9.8",
-    "@types/react-native": "0.62.18",
-    "typescript": "3.9.6"
+    "@types/react-native": "0.63.2",
+    "typescript": "3.9.7"
   },
   "scripts": {
     "start": "react-scripts start",
