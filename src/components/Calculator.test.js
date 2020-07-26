@@ -1,11 +1,11 @@
 import React from "react";
-import { render, fireEvent, cleanup } from "react-native-testing-library";
+import { render, fireEvent, cleanup } from "@testing-library/react";
 import { Calculator } from "./Calculator";
 
-const DIVIDE = "÷";
-const MULTIPLY = "×";
-const MINUS = "−";
-const ADD = "+";
+const DIVIDE    = "÷";
+const MULTIPLY  = "×";
+const MINUS     = "−";
+const ADD       = "+";
 
 const PLUS_MINUS = "±";
 const PERCENT = "%";
@@ -16,7 +16,7 @@ test("should have default value of zero", () => {
   const { getByTestId } = render(<Calculator />);
 
   const display = getByTestId("display");
-  expect(display.props.displayValue).toBe("0");
+  expect(display.textContent).toBe("0");
 });
 
 test("should allow number input", () => {
@@ -24,11 +24,11 @@ test("should allow number input", () => {
 
   const display = getByTestId("display");
 
-  fireEvent.press(getByText("1"));
-  fireEvent.press(getByText("2"));
-  fireEvent.press(getByText("3"));
+  fireEvent.click(getByText("1"));
+  fireEvent.click(getByText("2"));
+  fireEvent.click(getByText("3"));
 
-  expect(display.props.displayValue).toBe("123");
+  expect(display.textContent).toBe("123");
 });
 
 test("should ignore multiple zero input", () => {
@@ -36,125 +36,99 @@ test("should ignore multiple zero input", () => {
 
   const display = getByTestId("display");
 
-  fireEvent.press(getByTestId("zero"));
-  fireEvent.press(getByTestId("zero"));
-  fireEvent.press(getByTestId("zero"));
-  fireEvent.press(getByText("1"));
+  fireEvent.click(getByTestId("zero"));
+  fireEvent.click(getByTestId("zero"));
+  fireEvent.click(getByTestId("zero"));
+  fireEvent.click(getByTestId("key-1"));
 
-  expect(display.props.displayValue).toBe("1");
+  expect(display.textContent).toBe("1");
 });
 
-test("should have maximum input length of nine digits", () => {
+test("should format number to a maximum of nine digits", () => {
   const { getByTestId, getByText } = render(<Calculator />);
 
   const display = getByTestId("display");
 
-  fireEvent.press(getByText("1"));
-  fireEvent.press(getByText("2"));
-  fireEvent.press(getByText("3"));
-  fireEvent.press(getByText("4"));
-  fireEvent.press(getByText("5"));
-  fireEvent.press(getByText("6"));
-  fireEvent.press(getByText("7"));
-  fireEvent.press(getByText("8"));
-  fireEvent.press(getByText("9"));
-  fireEvent.press(getByText("9"));
-  fireEvent.press(getByText("9"));
+  fireEvent.click(getByText("1"));
+  fireEvent.click(getByText("2"));
+  fireEvent.click(getByText("3"));
+  fireEvent.click(getByText("4"));
+  fireEvent.click(getByText("5"));
+  fireEvent.click(getByText("6"));
+  fireEvent.click(getByText("7"));
+  fireEvent.click(getByText("8"));
+  fireEvent.click(getByText("9"));
+  fireEvent.click(getByText("9"));
+  fireEvent.click(getByText("9"));
 
-  expect(display.props.displayValue.length).toBe(9);
+  expect(display.textContent).toBe('123,456,789');
 });
 
-test("should do basic addition", () => {
+test("should format the integer part in a fractional numbers", () => {
   const { getByTestId, getByText } = render(<Calculator />);
 
   const display = getByTestId("display");
 
-  fireEvent.press(getByText("2"));
-  fireEvent.press(getByText(ADD));
-  fireEvent.press(getByText("8"));
-  fireEvent.press(getByText("="));
-
-  expect(display.props.displayValue).toBe("10");
+  fireEvent.click(getByText("1"));
+  fireEvent.click(getByText("2"));
+  fireEvent.click(getByText("3"));
+  fireEvent.click(getByText("4"));
+  fireEvent.click(getByText("."));
+  fireEvent.click(getByText("5"));
+  fireEvent.click(getByText("6"));
+  fireEvent.click(getByText("7"));
+  fireEvent.click(getByText("8"));
+  fireEvent.click(getByText("9"));
+  fireEvent.click(getByText("9"));
+  fireEvent.click(getByText("9"));
+  
+  expect(display.textContent).toBe('1,234.56789');
 });
 
-test("should do basic subtraction", () => {
+
+test("should handle a sequence of expressions", () => {
   const { getByTestId, getByText } = render(<Calculator />);
   const display = getByTestId("display");
 
-  fireEvent.press(getByText("2"));
-  fireEvent.press(getByText(MINUS));
-  fireEvent.press(getByText("4"));
-  fireEvent.press(getByText("="));
+  fireEvent.click(getByText("2"));
+  fireEvent.click(getByText(ADD));
+  fireEvent.click(getByText("8")); // 10
 
-  expect(display.props.displayValue).toBe("-2");
+  fireEvent.click(getByText(MINUS));
+  fireEvent.click(getByText("9")); // 1
+  
+  fireEvent.click(getByText(DIVIDE));
+  fireEvent.click(getByText("2")); // 0.5
+  
+  fireEvent.click(getByText(MULTIPLY));
+  fireEvent.click(getByText("2"));
+  fireEvent.click(getByText("0"));
+  
+  fireEvent.click(getByText("=")); 
+
+  expect(display.textContent).toBe("10");
 });
 
-test("should do basic multiplication", () => {
+test("should return a result from an expression after clicking equals", () => {
   const { getByTestId, getByText } = render(<Calculator />);
   const display = getByTestId("display");
 
-  fireEvent.press(getByText("5"));
-  fireEvent.press(getByText(MULTIPLY));
-  fireEvent.press(getByText("3"));
-  fireEvent.press(getByText("="));
+  fireEvent.click(getByText("1"));
+  fireEvent.click(getByText(ADD));
+  fireEvent.click(getByText("2"));
 
-  expect(display.props.displayValue).toBe("15");
-});
+  fireEvent.click(getByText("="));
 
-test("should do basic division", () => {
-  const { getByTestId, getByText } = render(<Calculator />);
-  const display = getByTestId("display");
+  fireEvent.click(getByText("6"));
 
-  fireEvent.press(getByText("1"));
-  fireEvent.press(getByText(DIVIDE));
-  fireEvent.press(getByText("2"));
-  fireEvent.press(getByText("="));
+  expect(display.textContent).toBe("6");
 
-  expect(display.props.displayValue).toBe("0.5");
-});
+  fireEvent.click(getByText(MULTIPLY));
+  fireEvent.click(getByText("3"));
 
-test("should handle multiple operations", () => {
-  const { getByTestId, getByText } = render(<Calculator />);
-  const display = getByTestId("display");
+  fireEvent.click(getByText("="));
 
-  fireEvent.press(getByText("2"));
-  fireEvent.press(getByText(ADD));
-  fireEvent.press(getByText("8")); // 10
-  fireEvent.press(getByText(MULTIPLY));
-
-  fireEvent.press(getByText("5")); // 50
-
-  fireEvent.press(getByText(DIVIDE));
-  fireEvent.press(getByText("2")); // 25
-
-  fireEvent.press(getByText(MINUS));
-  fireEvent.press(getByText("7"));
-  fireEvent.press(getByText("5"));
-  fireEvent.press(getByText("=")); // 25 - 75
-
-  expect(display.props.displayValue).toBe("-50");
-});
-
-test("should handle new expressions after evaluation", () => {
-  const { getByTestId, getByText } = render(<Calculator />);
-  const display = getByTestId("display");
-
-  fireEvent.press(getByText("1"));
-  fireEvent.press(getByText(ADD));
-  fireEvent.press(getByText("2"));
-
-  fireEvent.press(getByText("="));
-
-  fireEvent.press(getByText("6"));
-
-  expect(display.props.displayValue).toBe("6");
-
-  fireEvent.press(getByText(MULTIPLY));
-  fireEvent.press(getByText("3"));
-
-  fireEvent.press(getByText("="));
-
-  expect(display.props.displayValue).toBe("18");
+  expect(display.textContent).toBe("18");
 });
 
 // Decimal input
@@ -162,17 +136,43 @@ test("should handle decimal inputs", () => {
   const { getByTestId, getByText } = render(<Calculator />);
   const display = getByTestId("display");
 
-  fireEvent.press(getByText("."));
-  fireEvent.press(getByText("2"));
-  fireEvent.press(getByText("5"));
-  fireEvent.press(getByText(ADD));
-  fireEvent.press(getByText("."));
-  fireEvent.press(getByText("7"));
-  fireEvent.press(getByText("5"));
+  fireEvent.click(getByText("."));
+  fireEvent.click(getByText("2"));
+  fireEvent.click(getByText("5"));
 
-  fireEvent.press(getByText("="));
+  fireEvent.click(getByText(ADD));
+  fireEvent.click(getByText("."));
+  fireEvent.click(getByText("7"));
+  fireEvent.click(getByText("5"));
 
-  expect(display.props.displayValue).toBe("1");
+  fireEvent.click(getByText(DIVIDE));
+  fireEvent.click(getByText("."));
+  fireEvent.click(getByText("5"));
+
+  fireEvent.click(getByText(MINUS));
+  fireEvent.click(getByText("."));
+  fireEvent.click(getByText("7"));
+  fireEvent.click(getByText("5"));
+
+  fireEvent.click(getByText("="));
+
+  expect(display.textContent).toBe("1.25");
+});
+
+test("should handle decimal inputs", () => {
+  const { getByTestId, getByText } = render(<Calculator />);
+  const display = getByTestId("display");
+
+  fireEvent.click(getByText("."));
+  fireEvent.click(getByText("1"));
+
+  fireEvent.click(getByText(ADD));
+  fireEvent.click(getByText("."));
+  fireEvent.click(getByText("2"));
+
+  fireEvent.click(getByText("="));
+
+  expect(display.textContent).toBe("0.3");
 });
 
 // Operators
@@ -180,29 +180,30 @@ test("should handle toggle sign operator", () => {
   const { getByTestId, getByText } = render(<Calculator />);
   const display = getByTestId("display");
 
-  fireEvent.press(getByText(MINUS));
-  fireEvent.press(getByText("1"));
+  fireEvent.click(getByText(MINUS));
+  fireEvent.click(getByText("1"));
 
-  fireEvent.press(getByText("="));
+  fireEvent.click(getByText("="));
 
-  expect(display.props.displayValue).toBe("-1");
+  expect(display.textContent).toBe("-1");
 
-  fireEvent.press(getByText(PLUS_MINUS));
-  expect(display.props.displayValue).toBe("1");
+  fireEvent.click(getByText(PLUS_MINUS));
+  expect(display.textContent).toBe("1");
 });
 
 test("should handle percent operator", () => {
   const { getByTestId, getByText } = render(<Calculator />);
   const display = getByTestId("display");
 
-  fireEvent.press(getByText("1"));
-  fireEvent.press(getByTestId("zero"));
-  fireEvent.press(getByTestId("zero"));
+  fireEvent.click(getByText("1"));
+  fireEvent.click(getByTestId("zero"));
+  fireEvent.click(getByTestId("zero"));
 
-  fireEvent.press(getByText(PERCENT));
-  fireEvent.press(getByText(PERCENT));
-  fireEvent.press(getByText(PERCENT));
-  fireEvent.press(getByText(PERCENT));
+  fireEvent.click(getByText(PERCENT));
+  fireEvent.click(getByText(PERCENT));
+  fireEvent.click(getByText(PERCENT));
+  fireEvent.click(getByText(PERCENT));
+  fireEvent.click(getByText(PERCENT));
 
-  expect(display.props.displayValue).toBe("0.000001");
+  expect(display.textContent).toBe("1e-8");
 });
